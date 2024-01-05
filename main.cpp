@@ -2,18 +2,22 @@
  * Author: Eric Hansson
  * File: main.cpp
  * Date:
- * Purpose: 
+ * Purpose: Create a tic-tac-toe game 3x3 grid from scratch
+ * with C++
 ***********************************************************/
 #include <iostream>
 #include <utility>
 
 using namespace std;
 
+// Variable for X and O
 #define VAR_X 'X'
 #define VAR_O 'O'
 
+// Size of the grid
 #define GRIDSIZE 3
 
+// Declare the grid
 string grid[GRIDSIZE][GRIDSIZE];
 
 // i is row, j is column
@@ -25,18 +29,20 @@ void initGrid(){
     }
 }
 
+// Dealing with priting border to the grid
 void printBorder(){
-    cout << "+";
+    cout << " +";
     for (int i=0; i < GRIDSIZE; i++) {
         cout << "-+";
     }
     cout << endl;
 }
-// Use a 2D array for the grid
+// Uses a 2D array for the grid
 void printGrid(){
+    cout << "  0" << " 1" << " 2" << endl;
     printBorder();
     for (int i=0; i < GRIDSIZE; i++){
-        cout << "|";
+        cout << i  << "|";
         for (int j=0; j < GRIDSIZE; j++) {
             cout << grid[i][j] << "|";
         }
@@ -45,9 +51,54 @@ void printGrid(){
     }
 }
 
+// Player picking status
+bool playerStatus = false;
+
+// bool variable to keep track if the game is over or not
+// false = not over
+bool gameStatus = false;
+
+// player 1 is X, player 2 is O
+
 int main(int argc, char *argv[]){
+    // Variables for players
+    string playerNum;
+    string playerOne;
+    string playerTwo;
+
+    // Game prompt
+    cout << "Welcome to Tic-Tac-Toe!" << endl;
+    cout << endl;
     
+    while (!playerStatus) {
+        cout << "Select Player 1 or Player 2: ";
+        cin >> playerNum;
+        if(playerNum == "1"){
+           cout << "Player 1 please enter in your name: ";
+           cin >> playerOne;
+           cout << "Player 2 please enter in your name: ";
+           cin >> playerTwo;
+           playerStatus = true;
+        }
+        else if(playerNum == "2") {
+           cout << "Player 2 please enter in your name: ";
+           cin >> playerTwo;
+           cout << "Player 1 please enter in your name: ";
+           cin >> playerOne;
+           playerStatus = true;
+        }
+        else {
+            cout << "You have entered a invalid property! Please try again." << endl;
+        }
+    }
+
+    // Initialize grid
     initGrid();
-    printGrid();
+
+    while (!gameStatus) { 
+    }
+
+
+
     return 0;
 }
