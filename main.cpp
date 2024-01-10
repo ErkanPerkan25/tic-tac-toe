@@ -5,6 +5,7 @@
  * Purpose: Create a tic-tac-toe game 3x3 grid from scratch
  * with C++
 ***********************************************************/
+#include <cstdio>
 #include <iostream>
 #include <utility>
 
@@ -56,10 +57,6 @@ void printGrid(){
 // Player picking status
 bool playerStatus = false;
 
-// bool variable to keep track if the game is over or not
-// false = not over
-bool gameStatus = false;
-
 // function to check if there is a row of either X or O
 bool checkRow(char grid[][GRIDSIZE]){
     for (int i=0; i < GRIDSIZE; i++) {
@@ -86,7 +83,22 @@ bool checkCross(char grid[][GRIDSIZE]){
     if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2]) {
         return true; 
     } 
-    else if (grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]) {
+    if (grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]) {
+        return true; 
+    }
+    return false;
+}
+
+// not sure about thids, but another function to check for a win
+bool checkWin(char grid[][GRIDSIZE]){
+    for (int i=0; i < GRIDSIZE; i++) {
+         if (grid[i][0] == grid[i][1] && grid[i][1] == grid[i][2] || 
+             grid[0][i] == grid[1][i] && grid[1][i] == grid[2][i]) {
+            return true; 
+        }
+    } 
+    if (grid[0][0] == grid[1][1] && grid[1][1] == grid[2][2] ||
+        grid[0][2] == grid[1][1] && grid[1][1] == grid[2][0]) {
         return true; 
     }
     return false;
@@ -146,23 +158,19 @@ int main(int argc, char *argv[]){
     cout << endl;
 
     int movesMade = 0;
-
+    
+     
     // The game
-    while (!gameOver(grid) || movesMade != totalMoves) { 
+    while (gameOver(grid) == false || movesMade != totalMoves) { 
         int row, col;
         printGrid();
-        cout << playerOne << " please enter cordinate to place X (row, col): "; 
+        cout << playerOne << " enter row and column (row, column): ";
         cin >> row;
         cin >> col;
-        grid[row][col] = VAR_X;
-        cout << endl;
         
-        printGrid();
-        cout << playerTwo << " please enter cordinate to place O (row, col): "; 
-        cin >> row;
-        cin >> col;
-        grid[row][col] = VAR_O;
-        cout << endl;
+        if (grid[row][col] != ' ' || row < 0 || row > 2 || col < 0 || col > 2) {
+            cout << "Invalid output! Try again." << endl;
+        }
     }
 
     return 0;
