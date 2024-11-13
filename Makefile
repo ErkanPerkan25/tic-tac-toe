@@ -1,14 +1,17 @@
-CC = g++ -g -c -Wall -ansi -pedantic -std=c++20
+DEBUG = -g
+CXXFLAGS = $(DEBUG) -Wall -ansi -pedantic -std=c++20
+LDFLAGS = -c
 
-LN = g++
+CXX=g++ 
 
-OBJS = main.o
+OBJS = tic_tac_toe.o 
 
-exe: $(OBJS)
-	$(LN) -o exe $(OBJS)
- 
-main.o: main.cpp
-	$(CC) main.cpp
+.PHONY: all clean
+
+all: tic_tac_toe
+
+tic_tac_toe: tic_tac_toe.cpp
+	$(CXX) $(CXXFLAGS) -o tic_tac_toe tic_tac_toe.cpp 
 
 clean:
-	/bin/rm -f exe *.o *~ \#*
+	/bin/rm -rf *~ $(OBJS) tic_tac_toe
