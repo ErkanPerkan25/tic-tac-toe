@@ -128,6 +128,7 @@ int main(int argc, char* argv[]){
             board[row][col] = X;
 
             if(check_win(board)){
+                print_board(board);
                 cout << "X's WINS!!!!" << endl;
                 return 0;
             }
@@ -154,6 +155,7 @@ int main(int argc, char* argv[]){
             board[row][col] = O;
 
             if(check_win(board)){
+                print_board(board);
                 cout << "O's WINS!!!!" << endl;
                 return 0;
             }
